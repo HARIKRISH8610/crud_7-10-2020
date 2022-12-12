@@ -19,9 +19,15 @@ const crudSchema = new mongoose.Schema({
     required: [true, "Phone number is required"],
   },
   profilePic: {
-    data: Buffer,
-    contentType: String,
+    type: String,
+    default: null,
   },
+  players: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Player",
+    },
+  ],
 });
 
 const Crud = mongoose.model("Crud", crudSchema);

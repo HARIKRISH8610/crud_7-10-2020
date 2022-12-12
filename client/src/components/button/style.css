@@ -2,8 +2,9 @@
   width: fit-content;
   height: fit-content;
   padding: 5px 20px;
-  background: lightgray;
+  background: blue;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  color: white;
 }

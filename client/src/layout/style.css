@@ -1,21 +1,50 @@
-div {
+table {
   width: 100%;
-  height: 99vh;
+  border-collapse: collapse;
+  text-align: center;
+}
+table thead tr {
+  background-color: blue;
+  height: 40px;
+  color: white;
+}
+table tbody tr:nth-child(odd) {
+  background-color: white;
+  height: 40px;
+}
+table tbody tr:nth-child(even) {
+  background-color: lightgray;
+  height: 40px;
+}
+
+.profile_img_div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow-y: none !important;
+}
+.profile_img_cancel {
+  width: 100%;
+  height: 50px;
   display: flex;
-  overflow: hidden;
+  justify-content: end;
 }
-.images {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.profile_img_cancel span {
+  color: white;
+  padding-right: 50px;
+  padding-top: 10px;
+  font-size: 30px;
+  cursor: pointer;
 }
-/* .svg {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 150vh;
-}  */
+.profile_img_image {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.profile_img_image img {
+  width: auto;
+  height: 90vh;
+}

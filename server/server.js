@@ -19,7 +19,7 @@ mongoose.set("strictQuery", true);
 // connect to mongo db
 
 mongoose
-  .connect(db)
+  .connect(process.env.LOCAL_DB_URL)
   .then(() => console.log(`\r\n✔✔ Database connected successfully ✔✔`))
   .catch((err) => {
     console.log(`Something went wrong while connecting database💥\ ${err}`);
