@@ -1,8 +1,14 @@
 const express = require("express");
 
 const playerController = require("../controller/playerController");
+const {
+  protection,
+  apiAccessProtect,
+} = require("../controller/authController");
 
 const router = express.Router();
+
+router.use(protection, apiAccessProtect(["player"]));
 
 router
   .route("/")

@@ -1,0 +1,563 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Crud_App",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000"
+    },
+    {
+      "url": "http://localhost:5000"
+    }
+  ],
+  "paths": {
+    "/api/v1/user/login": {
+      "post": {
+        "security": [],
+        "tags": ["Auth"],
+        "summary": "login user",
+        "parameters": [],
+        "requestBody": {
+          "description": "login to continue",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successfully login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/login"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/signup": {
+      "post": {
+        "security": [],
+        "tags": ["Auth"],
+        "summary": "signup user",
+        "parameters": [],
+        "requestBody": {
+          "description": "create a new user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/signup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "successfully created a user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/signup"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/crud": {
+      "get": {
+        "tags": ["Crud"],
+        "summary": "Returns list of crud",
+        "responses": {
+          "200": {
+            "description": "the list of the crud",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/crud"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Crud"],
+        "summary": "Create new Crud in system",
+        "parameters": [],
+        "requestBody": {
+          "description": "New crud is created",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/crud"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New crud is created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/crud"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/crud/{id}": {
+      "get": {
+        "tags": ["Crud"],
+        "summary": "Returns single of crud data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas"
+            },
+            "description": "get a single crud by id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the list of the crud",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/crud"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Crud"],
+        "summary": "update single crud data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas"
+            },
+            "description": "get a single crud by id"
+          }
+        ],
+        "requestBody": {
+          "description": "New crud is created",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "unique": true,
+                    "description": "Name of the crud",
+                    "allowEmptyValue": false
+                  },
+                  "age": {
+                    "type": "number",
+                    "description": "Age of the person"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "email"
+                  },
+                  "phoneNumber": {
+                    "type": "number",
+                    "description": "phone number"
+                  },
+                  "profilePic": {
+                    "type": "file",
+                    "description": "profile picture"
+                  },
+                  "players": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated crud",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/crud"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Crud"],
+        "summary": "Delete single of crud data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas"
+            },
+            "description": "get a single crud by id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "delete crud data successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/player": {
+      "get": {
+        "tags": ["Player"],
+        "summary": "Returns list of player",
+        "responses": {
+          "200": {
+            "description": "the list of the player",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/player"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Player"],
+        "summary": "Create new Player in system",
+        "parameters": [],
+        "requestBody": {
+          "description": "New Player is created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/player"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New Player is created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/player"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/player/{id}": {
+      "get": {
+        "tags": ["Player"],
+        "summary": "Returns single of Player data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas"
+            },
+            "description": "get a single Player by id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the list of the player",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/player"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Player"],
+        "summary": "update single player data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas"
+            },
+            "description": "get a single player by id"
+          }
+        ],
+        "requestBody": {
+          "description": "Updated player",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "unique": true,
+                    "description": "Name of the player",
+                    "example": "vijay"
+                  },
+                  "level": {
+                    "type": "number",
+                    "description": "give a player level",
+                    "example": 10
+                  },
+                  "game": {
+                    "type": "string",
+                    "description": "name of the game",
+                    "example": "pubg"
+                  },
+                  "location": {
+                    "type": "number",
+                    "description": "location of the player",
+                    "example": "tirrupur"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated crud",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/crud"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Player"],
+        "summary": "Delete single of player data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas"
+            },
+            "description": "delete a single player by id"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "delete player data successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormate": "JWT"
+      }
+    },
+    "schemas": {
+      "login": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "email for login",
+            "example": "harikrish@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "password for login",
+            "example": "test1234"
+          }
+        }
+      },
+      "signup": {
+        "type": "object",
+        "required": [
+          "email",
+          "password",
+          "userName",
+          "password",
+          "confrimPassword"
+        ],
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "give a unique user name",
+            "unique": true,
+            "example": "harikrishna"
+          },
+          "email": {
+            "type": "string",
+            "unique": true,
+            "description": "give a unique email",
+            "example": "harikrish@gmail.com"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["head-coach", "coach", "captain", "player"],
+            "description": "role should with in head-coach, coach, captain, player by default it will be a player",
+            "example": "captain"
+          },
+          "password": {
+            "type": "string",
+            "description": "password and confrimPassword should be the same",
+            "example": "test1234"
+          },
+          "confrimPassword": {
+            "type": "string",
+            "description": "password and confrimPassword should be the same",
+            "example": "test1234"
+          }
+        }
+      },
+      "crud": {
+        "type": "object",
+        "required": ["name", "email", "age", "phoneNumber"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "unique": true,
+            "description": "Name of the crud",
+            "example": "vijay"
+          },
+          "age": {
+            "type": "number",
+            "description": "Age of the person",
+            "example": 26
+          },
+          "email": {
+            "type": "string",
+            "description": "email",
+            "example": "vijay@gmail.com"
+          },
+          "phoneNumber": {
+            "type": "number",
+            "description": "phone number",
+            "example": 7568412365
+          },
+          "profilePic": {
+            "type": "file",
+            "description": "profile picture",
+            "example": "http://localhost:4000/uploads\\breno-machado-in9-n0JwgZ0-unsplash.jpg"
+          },
+          "players": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "6396dd208929e87655c911ce"
+            }
+          }
+        }
+      },
+      "player": {
+        "type": "object",
+        "required": ["name", "game"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "unique": true,
+            "description": "Name of the player",
+            "example": "vijay"
+          },
+          "level": {
+            "type": "number",
+            "description": "give a player level",
+            "example": 10
+          },
+          "game": {
+            "type": "string",
+            "description": "name of the game",
+            "example": "pubg"
+          },
+          "location": {
+            "type": "number",
+            "description": "location of the player",
+            "example": "tirrupur"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": []
+}

@@ -3,9 +3,12 @@ const ApiFeatures = require("../utils/ApiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const ObjectId = require("mongoose").Types.ObjectId.isValid;
 
-exports.factoryGetAll = (Model, populate) =>
+exports.factoryGetAll = (Model, populate, key) =>
   catchAsync(async (req, res, next) => {
-    const newData = new ApiFeatures(Model.find().populate(populate), req.query)
+    const newData = new ApiFeatures(
+      Model.find().populate(populate, key),
+      req.query
+    )
       .filter()
       .sort()
       .fields()
@@ -69,10 +72,10 @@ exports.factoryUpdateOne = (Model) =>
         )
       );
     }
-    console.log(req.body);
     if (req.body === {}) {
       return next(new AppError(`Give any data to update`, 400));
     }
+
     const data = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -93,5 +96,5 @@ exports.factoryDeleteOne = (Model) =>
     if (!data) {
       return next(new AppError("No data found with this ID", 400));
     }
-    res.status(204).json();
+    res.status(204).json({});
   });

@@ -33,7 +33,12 @@ const fieldSignError = (err, res) => {
     message: `In Api query given fields is not valid`,
   });
 };
-
+const tokenExpired = (err, res) => {
+  res.status(401).json({
+    status: "Failed",
+    message: `Your token is expired ,you need to login again!!`,
+  });
+};
 const defaultError = (err, res) => {
   res.status(400).json(err);
 };
@@ -44,6 +49,7 @@ module.exports = (err, req, res, next) => {
   if (err.operational) return operationalError(error, res);
   if (err.code === 11000) return duplicateKey(error, res);
   if (err.code === 31253) return fieldSignError(error, res);
+  if (err.name === "TokenExpiredError") return tokenExpired(error, res);
   if (err?._message?.endsWith("validation failed"))
     return validationError(error, res);
 
